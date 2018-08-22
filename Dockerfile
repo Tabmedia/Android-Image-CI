@@ -68,29 +68,4 @@ RUN sdkmanager \
   "build-tools;27.0.2" 
 
 
-# ------------------------------------------------------
-# --- Install Google Cloud SDK
-# https://cloud.google.com/sdk/downloads
-#  Section: apt-get (Debian and Ubuntu only)
-#
-# E.g. for "Using Firebase Test Lab for Android from the gcloud Command Line":
-#  https://firebase.google.com/docs/test-lab/command-line
-#
-
-RUN echo "deb https://packages.cloud.google.com/apt cloud-sdk-`lsb_release -c -s` main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-RUN sudo apt-get update -qq \
- && sudo apt-get install -y -qq google-cloud-sdk
-
-ENV GCLOUD_SDK_CONFIG /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json
-
-# gcloud config doesn't update config.json. See the official Dockerfile for details:
-#  https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true \
- && sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' $GCLOUD_SDK_CONFIG \
- && /usr/bin/gcloud config set --installation core/disable_usage_reporting true \
- && sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $GCLOUD_SDK_CONFIG
-
-
-
 RUN sdkmanager "platforms;android-27"
