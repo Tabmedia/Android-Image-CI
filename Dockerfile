@@ -42,6 +42,8 @@ RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.and
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
 RUN yes | sdkmanager --licenses && sdkmanager --update
 
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
+
 # Platform tools
 RUN sdkmanager "emulator" "tools" "platform-tools"
 
@@ -73,4 +75,4 @@ RUN sdkmanager \
 "build-tools;28.0.3"
 
 
-RUN sdkmanager "platforms;android-27"
+RUN sdkmanager "platforms;android-28"
