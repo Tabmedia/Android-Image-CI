@@ -35,18 +35,23 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 # To get a full list of available options you can use:
 #  sdkmanager --list
 
-RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
+RUN mkdir ~/.android && touch ~/.android/repositories.cfg
+#accepting licenses
+RUN yes | sdkmanager --licenses
 
-RUN yes | sdkmanager --licenses && yes | sdkmanager --update
+# Install sdk elements (list from "sdkmanager --list")
+RUN sdkmanager "build-tools;28.0.3"
 
-# Update SDK manager and install system image, platform and build tools
-RUN sdkmanager \
-  "tools" \
-  "platform-tools" \
-  "emulator"
-
-RUN sdkmanager \
-  "build-tools;28.0.0" \
-  "build-tools;28.0.3"
+RUN sdkmanager "platform-tools" "tools"
 
 RUN sdkmanager "platforms;android-28"
+
+RUN sdkmanager "patcher;v4"
+
+# Updating everything again
+RUN sdkmanager --update
+
+#accepting licenses
+RUN yes | sdkmanager --licenses
+
+RUN sdkmanager --version
