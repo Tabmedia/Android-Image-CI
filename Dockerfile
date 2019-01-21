@@ -35,13 +35,10 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 # To get a full list of available options you can use:
 #  sdkmanager --list
 
-RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
-
 # Accept licenses before installing components, no need to echo y for each component
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
-RUN yes | sdkmanager --licenses
-RUN yes | sdkmanager --update
+RUN yes | sdkmanager --licenses && sdkmanager --update
 
 # Platform tools
 RUN sdkmanager "emulator" "tools" "platform-tools"
@@ -57,23 +54,18 @@ RUN sdkmanager \
   "emulator" \
   "extras;android;m2repository" \
   "extras;google;m2repository" \
-  "extras;google;google_play_services" \
-  'extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2' \
-  'extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2' 
-  
-RUN sdkmanager \
-"build-tools;25.0.0" \
-"build-tools;25.0.1" \
-"build-tools;25.0.2" \
-"build-tools;25.0.3" \
-"build-tools;26.0.1" \
-"build-tools;26.0.2" \
-"build-tools;27.0.0" \
-"build-tools;27.0.1" \
-"build-tools;27.0.2" \
-"build-tools;27.0.3" \
-"build-tools;28.0.0" \
-"build-tools;28.0.1" \
-"build-tools;28.0.3"
+  "extras;google;google_play_services"
 
-RUN sdkmanager "platforms;android-28"
+RUN sdkmanager \
+  "build-tools;25.0.0" \
+  "build-tools;25.0.1" \
+  "build-tools;25.0.2" \
+  "build-tools;25.0.3" \
+  "build-tools;26.0.1" \
+  "build-tools;26.0.2" \
+  "build-tools;27.0.0" \
+  "build-tools;27.0.1" \
+  "build-tools;27.0.2" 
+
+
+RUN sdkmanager "platforms;android-27"
