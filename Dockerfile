@@ -35,23 +35,24 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 # To get a full list of available options you can use:
 #  sdkmanager --list
 
-RUN mkdir ~/.android && touch ~/.android/repositories.cfg
-#accepting licenses
 RUN yes | sdkmanager --licenses
 
-# Install sdk elements (list from "sdkmanager --list")
-RUN sdkmanager "build-tools;28.0.3"
+# Platform tools
+RUN sdkmanager "emulator" "tools" "platform-tools"
 
-RUN sdkmanager "platform-tools" "tools"
+# SDKs
+# Please keep these in descending order!
+# The `yes` is for accepting all non-standard tool licenses.
 
-RUN sdkmanager "platforms;android-28"
-
-RUN sdkmanager "patcher;v4"
-
-# Updating everything again
-RUN sdkmanager --update
-
-#accepting licenses
-RUN yes | sdkmanager --licenses
-
-RUN sdkmanager --version
+# Please keep all sections in descending order!
+RUN yes | sdkmanager \
+    "platforms;android-28" \
+    "build-tools;28.0.3" \
+    "tools" \
+    "platform-tools" \
+    "emulator" \
+    "extras;android;m2repository" \
+    "extras;google;m2repository" \
+    "extras;google;google_play_services"
+    "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
+    "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" 
