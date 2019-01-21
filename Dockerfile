@@ -27,6 +27,9 @@ RUN cd /opt \
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
+RUN mkdir /root/.android \
+  && touch /root/.android/repositories.cfg
+
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
 
@@ -65,7 +68,11 @@ RUN sdkmanager \
   "build-tools;26.0.2" \
   "build-tools;27.0.0" \
   "build-tools;27.0.1" \
-  "build-tools;27.0.2" 
+  "build-tools;27.0.2" \
+  "build-tools;28.0.0" \
+  "build-tools;28.0.1" \
+  "build-tools;28.0.2" \
+  "build-tools;28.0.3" 
 
 
-RUN sdkmanager "platforms;android-27"
+RUN sdkmanager "platforms;android-28"
