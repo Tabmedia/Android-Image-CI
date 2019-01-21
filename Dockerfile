@@ -57,10 +57,6 @@ RUN sdkmanager \
   "extras;google;google_play_services"
 
 RUN sdkmanager \
-  "build-tools;28.0.0" \
-  "build-tools;28.0.1" \
-  "build-tools;28.0.2" \
   "build-tools;28.0.3" 
-
 
 RUN sdkmanager "platforms;android-28"
