@@ -27,9 +27,6 @@ RUN cd /opt \
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
-RUN mkdir /root/.android \
-  && touch /root/.android/repositories.cfg
-
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
 
