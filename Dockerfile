@@ -35,6 +35,8 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 # To get a full list of available options you can use:
 #  sdkmanager --list
 
+RUN mkdir ~/.android && touch ~/.android/repositories.cfg
+
 # Accept licenses before installing components, no need to echo y for each component
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
@@ -60,3 +62,9 @@ RUN sdkmanager \
   "build-tools;28.0.3" 
 
 RUN sdkmanager "platforms;android-28"
+
+# Updating everything again
+RUN sdkmanager --update
+
+#accepting licenses
+RUN yes | sdkmanager --licenses
