@@ -38,8 +38,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 # Accept licenses before installing components, no need to echo y for each component
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
-# RUN yes | sdkmanager --licenses && sdkmanager --update
-RUN sdkmanager --update && yes | sdkmanager --licenses
+RUN yes | sdkmanager --licenses && sdkmanager --update
 
 # Platform tools
 RUN sdkmanager "emulator" "tools" "platform-tools"
