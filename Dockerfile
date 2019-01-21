@@ -53,6 +53,6 @@ RUN yes | sdkmanager \
     "emulator" \
     "extras;android;m2repository" \
     "extras;google;m2repository" \
-    "extras;google;google_play_services"
+    "extras;google;google_play_services" \
     "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
     "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" 
